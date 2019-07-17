@@ -8,6 +8,7 @@ const coords = `39.98590952,-82.985029`
 const radius = 8046.72
 // to follow up with reviews
 const placeFields = 'review'
+const searchType = 'park'
 const baseURL = `https://maps.googleapis.com/maps/api/place`
 
 export default {
@@ -23,8 +24,10 @@ export default {
         console.log(error)
       })
   },
-  getMapSearchResults: (searchInput) => {
+  searchNearByResults: (searchInput) => {
+    // nearbysearch/json?location=-33.8670522,151.1957362&radius=1500&type=restaurant&keyword=cruise&key=
     let mapQuery = `${baseURL}/findplacefromtext/json?input=${searchInput}&inputtype=textquery&fields=${mapFields}&locationbias=circle:${radius}@${coords}&key=${MAP_KEY}`
+    let mapQuery = `${baseURL}/nearbysearch/json?location=${searchInput}&radius=1500&type=park&keyword=cruise&key=${MAP_KEY}`
     return fetch(mapQuery)
       .then(request => {
         if (request.ok) {

@@ -94,45 +94,6 @@ export class ParkMap extends Component {
       </CurrentLocation>
     )
   }
-
-  // render () {
-  //   return (
-  //     <Map
-  //       google={this.props.google}
-  //       zoom={9}
-  //       style={mapStyles}
-  //       initialCenter={{
-  //         lat: 39.9859095,
-  //         lng: -82.985029,
-  //       }}
-  //     >
-  //       { this.state.data.map((pg, i) => this.createMarkers(pg, i)) }
-  //       <InfoWindow
-  //         marker={this.state.activeMarker}
-  //         visible={this.state.showingInfoWindow}
-  //         onClose={this.onClose}
-  //       >
-
-  //         <div className=''>
-  //           <h4>{this.state.selectedPlace.name}</h4>
-  //           <div className=''>
-  //             <img className='info-img' src='https://www.fillmurray.com/80/80' />
-  //             <img className='info-img' src='https://www.fillmurray.com/80/80' />
-  //             <img className='info-img' src='https://www.fillmurray.com/80/80' />
-  //           </div>
-  //           <div className=''>
-  //             <p className='review'>{'Shade: 5'}</p>
-  //             <p className='review'>{'Cleanliness: 4.5'}</p>
-  //           </div>
-  //           <span className='tag'>{'skate boarding'}</span>
-  //           <span className='tag'>{'paved trail'}</span>
-  //         </div>
-
-  //       </InfoWindow>
-  //     </Map>
-
-  //   )
-  // }
 }
 
 export default GoogleApiWrapper({
