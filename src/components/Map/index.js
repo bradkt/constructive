@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
-import { GoogleApiWrapper, InfoWindow, Marker, Map } from 'google-maps-react'
+import React, { Component, createRef } from 'react'
+import { Map, TileLayer, Marker, Popup } from 'react-leaflet'
+import { Icon, Marker as LeafletMarker } from 'leaflet'
 import request from '../../api'
-import CurrentLocation from './currentLocation'
 import FlagIcon from '../../assets/img/flag.png'
 
 const mapStyles = {
@@ -11,91 +11,85 @@ const mapStyles = {
 }
 
 export class ParkMap extends Component {
+  constructor (props) {
+    super(props)
+    this.mapRef = createRef()
+  }
+
   state = {
     loading: true,
     error: false,
-    showingInfoWindow: false, // Hides or the shows the infoWindow
-    activeMarker: {}, // Shows the active marker upon click
-    selectedPlace: {}, // Shows the infoWindow to the selected place upon a marker
     data: [],
+    latlng: {
+      lat: 39.9859095,
+      lng: -82.985029,
+    },
+    zoom: 9,
+    hasLocation: false,
+    currentLocation: { },
   };
 
   componentDidMount () {
-    // get data
+    this.getCurrentLocation()
+  }
+
+  getCurrentLocation = () => {
+    const map = this.mapRef.current
+    if (map != null) {
+      map.leafletElement.locate()
+    }
+  }
+
+  handleLocationFound = (e) => {
+    e = {...e, info: {name: 'You are here'}}
+    this.setState({
+      hasLocation: true,
+      latlng: e.latlng,
+      currentLocation: e,
+    })
+
     request.getFakeData('fakeurl').then(res => {
       this.setState({ data: res.data })
     })
   }
 
-  onMarkerClick = (props, marker, e) => {
-    this.setState({
-      selectedPlace: props,
-      activeMarker: marker,
-      showingInfoWindow: true,
-    })
-  }
-
-  onClose = props => {
-    if (this.state.showingInfoWindow) {
-      this.setState({
-        showingInfoWindow: false,
-        activeMarker: null,
-      })
-    }
-  };
-
-  createMarkers = (data, i) => {
+  createMarker = (data, key) => {
     return (
       <Marker
-        key={i}
-        onClick={this.onMarkerClick}
-        name={data.info.name}
-        title={data.title}
-        position={data.position}
-        icon={{
-          url: data.icon.url,
-          anchor: new this.props.google.maps.Point(32, 32),
-          scaledSize: new this.props.google.maps.Size(64, 64),
-        }}
-        tags={data.info.tags}
-      />
+        key={key}
+        position={[data.latlng.lat, data.latlng.lng]}
+      >
+        <Popup>
+          <p>{ data.info.name }</p>
+          <img src='smiley.gif' alt='Smiley face' height='42' width='42' />
+        </Popup>
+      </Marker>
     )
   }
 
   render () {
+    console.log('haslocation: ', this.state.hasLocation)
+    let currentLocation = this.state.hasLocation ? this.createMarker(this.state.currentLocation, 'currentLocation') : null
     return (
-      <CurrentLocation
-        centerAroundCurrentLocation
-        google={this.props.google}
-      >
-        { this.state.data.map((pg, i) => this.createMarkers(pg, i)) }
-        <InfoWindow
-          marker={this.state.activeMarker}
-          visible={this.state.showingInfoWindow}
-          onClose={this.onClose}
-        >
+      <Map
+        style={mapStyles}
+        center={this.state.latlng}
+        length={4}
+        onLocationfound={this.handleLocationFound}
+        ref={this.mapRef}
+        zoom={13}>
+        <TileLayer
+          attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+          url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+        />
+        { currentLocation }
+        { this.state.data.map((park, i) => {
+          return this.createMarker(park, i)
+        })}
 
-          <div className=''>
-            <h4>{this.state.selectedPlace.name}</h4>
-            <div className=''>
-              <img className='info-img' src='https://www.fillmurray.com/80/80' />
-              <img className='info-img' src='https://www.fillmurray.com/80/80' />
-              <img className='info-img' src='https://www.fillmurray.com/80/80' />
-            </div>
-            <div className=''>
-              <p className='review'>{'Shade: 5'}</p>
-              <p className='review'>{'Cleanliness: 4.5'}</p>
-            </div>
-            <span className='tag'>{'skate boarding'}</span>
-            <span className='tag'>{'paved trail'}</span>
-          </div>
-
-        </InfoWindow>
-      </CurrentLocation>
+      </Map>
     )
   }
 }
 
-export default GoogleApiWrapper({
-  apiKey: process.env.GATSBY_MAP_KEY,
-})(ParkMap)
+export default ParkMap

@@ -10,6 +10,7 @@ export default class HTML extends Component {
           <meta name='viewport' content='width=device-width, initial-scale=1, user-scalable=no' />
           {this.props.headComponents}
           <link rel='shortcut icon' href={favicon} />
+          <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.css' />
         </head>
         <body>
           <div

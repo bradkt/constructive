@@ -2,13 +2,11 @@ import FlagIcon from '../assets/img/flag.png'
 const fetch = window.fetch
 const MAP_KEY = process.env.GATSBY_MAP_KEY
 // place_id only if we want reviews.... so prbaly
-const mapFields = 'photos,formatted_address,name,rating,user_ratings_total,place_id'
 const coords = `39.98590952,-82.985029`
-// 5000 meters is about 3.1 miles // 8046.72 is 5 miles // 16093.4 is 10 miles // 32186.9 is 20 miles
-const radius = 8046.72
+// RADIUS: 5000 meters is about 3.1 miles // 8046.72 is 5 miles // 16093.4 is 10 miles // 32186.9 is 20 miles
 // to follow up with reviews
 const placeFields = 'review'
-const searchType = 'park'
+
 const baseURL = `https://maps.googleapis.com/maps/api/place`
 
 export default {
@@ -24,10 +22,21 @@ export default {
         console.log(error)
       })
   },
-  searchNearByResults: (searchInput) => {
-    // nearbysearch/json?location=-33.8670522,151.1957362&radius=1500&type=restaurant&keyword=cruise&key=
-    let mapQuery = `${baseURL}/findplacefromtext/json?input=${searchInput}&inputtype=textquery&fields=${mapFields}&locationbias=circle:${radius}@${coords}&key=${MAP_KEY}`
-    let mapQuery = `${baseURL}/nearbysearch/json?location=${searchInput}&radius=1500&type=park&keyword=cruise&key=${MAP_KEY}`
+  searchNearByResults: (searchType = 'park', radius = 8046.72) => {
+    let mapQuery = `${baseURL}/nearbysearch/json?location=${coords}&radius=${radius}&type=${searchType}&key=${MAP_KEY}`
+    return fetch(mapQuery)
+      .then(request => {
+        if (request.ok) {
+          return request.json()
+        }
+        throw new Error('Network response was not ok.')
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
+  },
+  searchNearByResultsWithKeywords: (searchType = 'park', radius = 8046.72, keyword = '') => {
+    let mapQuery = `${baseURL}/nearbysearch/json?location=${coords}&radius=${radius}&type=${searchType}&keyword=${keyword}&key=${MAP_KEY}`
     return fetch(mapQuery)
       .then(request => {
         if (request.ok) {
@@ -72,7 +81,7 @@ let testmarkers = {
   data: [
     {
       title: 'Kenyatta International',
-      position: {
+      latlng: {
         lat: 39.98,
         lng: -82.78,
       },
@@ -86,7 +95,7 @@ let testmarkers = {
     },
     {
       title: 'Columbus Ohio',
-      position: {
+      latlng: {
         lat: 39.98,
         lng: -82.48,
       },
@@ -100,7 +109,7 @@ let testmarkers = {
     },
     {
       title: 'Pickerionton Ohio',
-      position: {
+      latlng: {
         lat: 39.98,
         lng: -82.08,
       },
@@ -115,6 +124,3 @@ let testmarkers = {
   ],
 }
 
-let googleMarkers = {
-  // get
-}
