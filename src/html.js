@@ -11,6 +11,8 @@ export default class HTML extends Component {
           {this.props.headComponents}
           <link rel='shortcut icon' href={favicon} />
           <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.css' />
+          <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css' />
+          {/* <link rel='stylesheet' href='https://unpkg.com/@kunukn/react-collapse/dist/Collapse.umd.css' /> */}
         </head>
         <body>
           <div

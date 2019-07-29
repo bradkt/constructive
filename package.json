@@ -41,6 +41,7 @@
     "netlify-cms": "^2.3.3",
     "node-sass": "^4.11.0",
     "prop-types": "^15.6.2",
+    "rc-collapse": "^1.11.3",
     "react": "^16.7.0",
     "react-disqus-comments": "^1.4.0",
     "react-dom": "^16.7.0",
@@ -48,6 +49,7 @@
     "react-leaflet": "^2.4.0",
     "react-share": "^2.4.0",
     "react-typography": "^0.16.19",
+    "svg.js": "^2.7.1",
     "typography": "^0.16.19",
     "uglifyjs-webpack-plugin": "^2.1.1"
   },
