@@ -6,6 +6,7 @@ import CustomModal from '../Modal'
 class ListItem extends Component {
   state = {
     park: {},
+    // colors: ['DarkTurquoise', 'LightSkyBlue', 'LightSalmon', 'MediumPurple', 'MediumSlateBlue', 'OrangeRed', 'red', 'orange', 'yellow', 'PapayaWhip', 'Teal', 'purple', 'Thistle', 'YellowGreen', 'BlanchedAlmond', 'green', 'PowderBlue', 'purple', 'IndianRed', 'orange'],
   }
   componentDidMount () {
     this.setState({
@@ -17,7 +18,7 @@ class ListItem extends Component {
     let i = this.props.i
     return (
       <div className='list-item' key={park.id}>
-        {park.name} <a className='button is-primary is-small' onClick={() => this.props.displayModal(park, i)}>{` ${i} `}</a>
+        {park.name} <a className={`button is-small list-color${i}`} onClick={() => this.props.displayModal(park, i)}>{` ${i} `}</a>
       </div>
     )
   }
@@ -34,12 +35,11 @@ export class CustomList extends Component {
 
   createListItems = (park, i) => {
     return (
-      <ListItem park={park} i={i} displayModal={(park, i) => this.displayModal(park, i)} />
+      <ListItem park={park} key={i} i={i} displayModal={(park, i) => this.displayModal(park, i)} />
     )
   }
 
   displayModal = (park, i) => {
-    console.log('displayModal: ', park)
     this.setState({
       isModalOpen: true,
       activePark: { ...park, index: i },
@@ -56,7 +56,7 @@ export class CustomList extends Component {
   render () {
     let { parkData, hasParkData } = this.props
     let ListOfParks = parkData.map((park, i) => {
-      return this.createListItems(park, i)
+      return this.createListItems(park, i + 1)
     })
 
     return (

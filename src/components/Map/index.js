@@ -1,9 +1,8 @@
 import React, { Component, createRef } from 'react'
 import { Map, TileLayer, Marker, Popup, Tooltip } from 'react-leaflet'
 import { Icon, Marker as LeafletMarker } from 'leaflet'
-import FlagIcon from '../../assets/img/flag.png'
 import request from '../../api'
-import CustomMarker from '../Markers'
+import CustomMarker, { BasicMarker } from '../Markers'
 
 export class ParkMap extends Component {
   constructor (props) {
@@ -77,8 +76,12 @@ export class ParkMap extends Component {
         </Marker>
 
         { this.props.hasData ? this.props.parkData.map((park, i) => {
-          return <CustomMarker key={park.id} park={park} index={i} />
+          return <CustomMarker key={park.id} park={park} index={i + 1} />
         }) : null }
+
+        {/* { this.props.hasData ? this.props.parkData.map((park, i) => {
+          return <CustomMarker key={park.id} park={park} number={i} color={'#FFE4B5'} />
+        }) : null } */}
 
       </Map>
     )

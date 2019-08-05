@@ -1,4 +1,3 @@
-import FlagIcon from '../assets/img/flag.png'
 import * as googleData from '../assets/example.json'
 const fetch = window.fetch
 const MAP_KEY = process.env.GATSBY_GOOGLE_MAP_KEY
@@ -89,53 +88,6 @@ export default {
       }, 190)
     })
   },
-}
-
-let testmarkers = {
-  data: [
-    {
-      title: 'Kenyatta International',
-      latlng: {
-        lat: 39.98,
-        lng: -82.78,
-      },
-      icon: { url: FlagIcon },
-      info: {
-        name: 'Kenyatta International Convention Centre',
-        images: [],
-        ratings: [{ name: 'bathrooms', rating: 7 }],
-        tags: ['field', 'paved trail'],
-      },
-    },
-    {
-      title: 'Columbus Ohio',
-      latlng: {
-        lat: 39.98,
-        lng: -82.48,
-      },
-      icon: { url: FlagIcon },
-      info: {
-        name: 'Columbus Ohio parks and rec downtown',
-        images: [],
-        ratings: [{ name: 'shade', rating: 8 }],
-        tags: ['grills', 'covered picnicing'],
-      },
-    },
-    {
-      title: 'Pickerionton Ohio',
-      latlng: {
-        lat: 39.98,
-        lng: -82.08,
-      },
-      icon: { url: FlagIcon },
-      info: {
-        name: 'Pickerington center for kids who can read good',
-        images: [],
-        ratings: [{ name: 'sitting', rating: 9 }],
-        tags: ['climbing wall', 'non-paved trail'],
-      },
-    },
-  ],
 }
 
 let example = {

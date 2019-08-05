@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 export class CustomModal extends Component {
   render () {
     let { isActive, park } = this.props
-    console.log(this.props)
     return (
       <div className='is-clipped'>
         <div className={isActive ? `modal is-active` : `modal`}>
@@ -25,16 +24,11 @@ export class CustomModal extends Component {
                       {park.vicinity}
                     </p>
                   </div>
-                  <nav className='level is-mobile'>
+                  <div className='level is-mobile'>
                     <div className='level-left'>
                       <a className='level-item' aria-label='reply'>
                         <span className='icon is-small'>
                           <i className='fas fa-reply' aria-hidden='true' />
-                        </span>
-                      </a>
-                      <a className='level-item' aria-label='retweet'>
-                        <span className='icon is-small'>
-                          <i className='fas fa-retweet' aria-hidden='true' />
                         </span>
                       </a>
                       <a className='level-item' aria-label='like'>
@@ -43,7 +37,7 @@ export class CustomModal extends Component {
                         </span>
                       </a>
                     </div>
-                  </nav>
+                  </div>
                 </div>
               </article>
             </div>

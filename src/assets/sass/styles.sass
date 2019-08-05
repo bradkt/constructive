@@ -3,6 +3,22 @@ $number-icons: '../img/number-icon-trans.png'
 $primary: #00d1b2
 $primary-invert: #ffffff
 
+$markerColor: Gold, Aquamarine, LightSalmon, MediumPurple, MediumSlateBlue, OrangeRed, red, orange, yellow, PapayaWhip, Teal, purple, Thistle, YellowGreen, BlanchedAlmond, DeepPink, PowderBlue, Lavender, IndianRed, orange;
+// $textColors: green, blue, purple, red, orange, yellow, green, blue, purple, red, orange, yellow, green, blue, purple, red, orange, red, orange, yellow;
+$repeat: 20
+
+// complement(#6b717f)
+// scale-color(#036, $lightness: -60%)
+
+@for $i from 1 through $repeat
+  .map-marker-svg#{$i} svg circle
+        fill: nth($markerColor, $i)
+  .map-marker-svg#{$i} svg text
+        fill: scale-color(nth($markerColor, $i), $lightness: -60%)
+  a.button.list-color#{$i}
+        background-color: nth($markerColor, $i)
+        border-color: scale-color(nth($markerColor, $i), $lightness: -60%)
+
 nav
   border-bottom: lightgray solid 0.1vmin
 
@@ -40,112 +56,3 @@ nav
 .list
   height: 480px
   overflow: scroll
-
-#mapMarker
-  color: green
-
-
-
-.icon-style-a
-  color:seagreen
-  fill:blueviolet
-
-// #1-icon
-//   background: url($number-icons) no-repeat -146px -116px
-// 	width: 360px
-// 	height: 84px
-
-// #2-icon
-//   background: $number-icons no-repeat -590px -115px
-// 	width: 360px
-// 	height: 84px
-
-// #3-icon
-//   background: $number-icons no-repeat -1032px -112px
-// 	width: 360px
-// 	height: 84px
-
-// #4-icon
-//   background: $number-icons no-repeat -1501px -104px
-// 	width: 360px
-// 	height: 84px
-
-// #5-icon
-//   background: $number-icons no-repeat -148px -534px
-// 	width: 360px
-// 	height: 84px
-
-// #6-icon
-//   background: $number-icons no-repeat -585px -546px
-// 	width: 360px
-// 	height: 84px
-
-// #7-icon
-//   background: $number-icons no-repeat -1025px -536px
-// 	width: 360px
-// 	height: 84px
-
-// #8-icon
-//   background: $number-icons no-repeat -1504px -536px
-// 	width: 360px
-// 	height: 84px
-
-// #9-icon
-//   background: $number-icons no-repeat -149px -975px
-// 	width: 360px
-// 	height: 84px
-  
-// #10-icon
-//   background: $number-icons no-repeat -585px -970px
-// 	width: 360px
-// 	height: 84px
-
-// #11-icon
-//   background: $number-icons no-repeat -1036px -963px
-// 	width: 360px
-// 	height: 84px
-
-// #12-icon
-//   background: $number-icons no-repeat -1501px -968px
-// 	width: 360px
-// 	height: 84px
-
-// #13-icon
-//   background: $number-icons no-repeat -146px -116px
-// 	width: 360px
-// 	height: 84px
-
-// #14-icon
-//   background: $number-icons no-repeat -576px -1425px
-// 	width: 360px
-// 	height: 84px
-  
-// #15-icon
-//   background: $number-icons no-repeat -1032px -1412px
-// 	width: 360px
-// 	height: 84px
-
-// #16-icon
-//   background: $number-icons no-repeat -1502px -1412px
-// 	width: 360px
-// 	height: 84px
-
-// #17-icon
-//   background: $number-icons no-repeat -146px -116px
-// 	width: 360px
-// 	height: 84px
-
-// #18-icon
-//   background: $number-icons no-repeat -146px -116px
-// 	width: 360px
-// 	height: 84px
-  
-// #19-icon
-//   background: $number-icons no-repeat -146px -116px
-// 	width: 360px
-// 	height: 84px
-
-// #20-icon
-//   background: $number-icons no-repeat -146px -116px
-// 	width: 360px
-// 	height: 84px
