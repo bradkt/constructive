@@ -20,8 +20,8 @@ export class ParkMap extends Component {
     zoom: 9,
     hasLocation: false,
     markerLocation: {
-      lat: 39.9859095,
-      lng: -82.985029,
+      lat: 40.00,
+      lng: -83.00,
     },
   };
 

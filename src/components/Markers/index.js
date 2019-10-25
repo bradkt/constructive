@@ -27,7 +27,7 @@ export class CustomMarker extends Component {
         icon={this.icon}
       >
         <Tooltip>{ park.name }</Tooltip>
-        <Popup>
+        {/* <Popup>
           <div className=''>
             <h4>{ park.name }</h4>
             <div className=''>
@@ -37,7 +37,7 @@ export class CustomMarker extends Component {
             <span className='tag'>{'skate boarding'}</span>
             <span className='tag'>{'paved trail'}</span>
           </div>
-        </Popup>
+        </Popup> */}
       </Marker>
     )
   }

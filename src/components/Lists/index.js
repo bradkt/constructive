@@ -6,7 +6,6 @@ import CustomModal from '../Modal'
 class ListItem extends Component {
   state = {
     park: {},
-    // colors: ['DarkTurquoise', 'LightSkyBlue', 'LightSalmon', 'MediumPurple', 'MediumSlateBlue', 'OrangeRed', 'red', 'orange', 'yellow', 'PapayaWhip', 'Teal', 'purple', 'Thistle', 'YellowGreen', 'BlanchedAlmond', 'green', 'PowderBlue', 'purple', 'IndianRed', 'orange'],
   }
   componentDidMount () {
     this.setState({

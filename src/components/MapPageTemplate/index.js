@@ -2,7 +2,7 @@ import React from 'react'
 import Helmet from 'react-helmet'
 import PropTypes from 'prop-types'
 import ParkMap from '../Map'
-import request from '../../api'
+import request, { constructiveAPI } from '../../api'
 import CustomList from '../Lists'
 
 export class MapPageTemplate extends React.Component {
@@ -15,6 +15,10 @@ export class MapPageTemplate extends React.Component {
       data: [],
       parkData: [],
     }
+  }
+
+  componentDidMount () {
+    constructiveAPI.getParks()
   }
 
   searchLocation = (latlng) => {
@@ -36,7 +40,7 @@ export class MapPageTemplate extends React.Component {
           <meta name='description' content={this.props.meta_description} />
         </Helmet>
         <section className='is-primary is-bold is-medium'>
-          <div className='container'>
+          {/* <div className='container'>
             <div className='columns'>
               <div className='column is-10 is-offset-1'>
                 <div className='section'>
@@ -47,7 +51,7 @@ export class MapPageTemplate extends React.Component {
                 <p>{this.props.heading}</p>
               </div>
             </div>
-          </div>
+          </div> */}
         </section>
 
         <section className='map-container'>

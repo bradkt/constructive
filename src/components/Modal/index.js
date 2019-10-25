@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import _Rating from '../Ratings'
 
 export class CustomModal extends Component {
   render () {
@@ -23,6 +24,8 @@ export class CustomModal extends Component {
                       <br />
                       {park.vicinity}
                     </p>
+                    <_Rating score={park.rating}
+                    />
                   </div>
                   <div className='level is-mobile'>
                     <div className='level-left'>
